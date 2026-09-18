@@ -24,7 +24,6 @@
 - [24 用例批量安全评估与指标说明](docs/BENCHMARK.md)
 - [实测结果与解读](docs/BENCHMARK_RESULTS.md)
 - [VMware、Ollama 与 Wazuh 部署指南](docs/DEPLOYMENT.md)
-- [简历项目描述与面试讲解](docs/RESUME_ENTRY.md)
 
 ## 快速开始
 
