@@ -1,0 +1,50 @@
+<group name="rag_security_lab,">
+  <rule id="100300" level="3">
+    <if_sid>86600</if_sid>
+    <field name="event_type" type="pcre2">^rag_retrieval$</field>
+    <description>RAG Security Lab: knowledge-base retrieval audit event.</description>
+    <group>rag_security_lab,ai_security,rag_retrieval,</group>
+  </rule>
+
+  <rule id="100301" level="3">
+    <if_sid>86600</if_sid>
+    <field name="event_type" type="pcre2">^rag_model_response$</field>
+    <description>RAG Security Lab: model response audit event.</description>
+    <group>rag_security_lab,ai_security,rag_model_response,</group>
+  </rule>
+
+  <rule id="100310" level="8">
+    <if_sid>100300</if_sid>
+    <field name="poisoned_chunk_retrieved" type="pcre2">^true$</field>
+    <description>RAG Security Lab: known poisoned document entered the retrieved context.</description>
+    <group>rag_security_lab,ai_security,knowledge_base_poisoning,owasp_llm01,</group>
+  </rule>
+
+  <rule id="100320" level="12">
+    <if_sid>100300</if_sid>
+    <field name="cross_tenant_access" type="pcre2">^true$</field>
+    <description>RAG Security Lab: cross-tenant document retrieval detected.</description>
+    <group>rag_security_lab,ai_security,data_exposure,access_control_failure,</group>
+  </rule>
+
+  <rule id="100330" level="12">
+    <if_sid>100301</if_sid>
+    <field name="canary_leaked" type="pcre2">^true$</field>
+    <description>RAG Security Lab: Canary token leaked in model output after possible indirect prompt injection.</description>
+    <group>rag_security_lab,ai_security,indirect_prompt_injection,owasp_llm01,sensitive_information_disclosure,</group>
+  </rule>
+
+  <rule id="100340" level="12" frequency="3" timeframe="60" ignore="120">
+    <if_matched_sid>100310</if_matched_sid>
+    <same_field>tenant_id</same_field>
+    <description>RAG Security Lab: repeated poisoned-context retrievals for the same tenant.</description>
+    <group>rag_security_lab,ai_security,rag_correlation,</group>
+  </rule>
+
+  <rule id="100350" level="9">
+    <if_sid>550</if_sid>
+    <field name="file" type="pcre2">^/opt/rag-security-lab/(rag_lab|data/corpus)/</field>
+    <description>RAG Security Lab: application code or knowledge corpus was modified.</description>
+    <group>rag_security_lab,ai_security,rag_integrity_change,</group>
+  </rule>
+</group>

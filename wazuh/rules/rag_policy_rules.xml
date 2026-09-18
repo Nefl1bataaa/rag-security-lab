@@ -1,0 +1,16 @@
+<group name="rag_security_lab,">
+  <rule id="100302" level="3">
+    <if_sid>86600</if_sid>
+    <field name="event_type">^rag_ingestion_policy$</field>
+    <description>RAG Security Lab: ingestion policy evaluation event.</description>
+    <group>ai_security,rag_ingestion_policy,</group>
+  </rule>
+
+  <rule id="100305" level="7">
+    <if_sid>100302</if_sid>
+    <field name="policy_mode">^audit$</field>
+    <field name="suspicious_document">^true$</field>
+    <description>RAG Security Lab: suspicious knowledge document observed in audit mode.</description>
+    <group>ai_security,knowledge_base_poisoning,policy_audit,</group>
+  </rule>
+</group>

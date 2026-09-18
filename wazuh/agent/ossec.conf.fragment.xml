@@ -1,0 +1,19 @@
+<!--
+  Merge these entries into the existing Linux-server Agent configuration.
+  Keep a single outer <ossec_config> element in /var/ossec/etc/ossec.conf.
+  This path intentionally differs from the existing /opt/websec-lab paths.
+-->
+<localfile>
+  <location>/opt/rag-security-lab/logs/audit.jsonl</location>
+  <log_format>json</log_format>
+  <label key="lab.role">ai-rag</label>
+  <label key="lab.environment">isolated</label>
+  <label key="lab.application">rag-security-lab</label>
+  <label key="lab.disposition">triage-required</label>
+</localfile>
+
+<!-- Merge these entries inside the existing Agent <syscheck> block. -->
+<directories check_all="yes" report_changes="yes" realtime="yes">/opt/rag-security-lab/rag_lab</directories>
+<directories check_all="yes" report_changes="yes" realtime="yes">/opt/rag-security-lab/data/corpus</directories>
+<ignore>/opt/rag-security-lab/logs</ignore>
+<ignore>/opt/rag-security-lab/storage</ignore>

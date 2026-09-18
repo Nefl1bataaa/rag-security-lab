@@ -1,0 +1,9 @@
+<group name="rag_security_lab,">
+  <rule id="100360" level="10">
+    <if_sid>86600</if_sid>
+    <field name="lab_component">^rag-security-lab$</field>
+    <field name="event_type">^rag_integrity$</field>
+    <description>RAG Security Lab: suspicious knowledge document automatically quarantined.</description>
+    <group>ai_security,knowledge_base_poisoning,incident_response,</group>
+  </rule>
+</group>

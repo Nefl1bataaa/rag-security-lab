@@ -1,0 +1,5 @@
+<!--
+  RAG audit events are single-line JSON and use Wazuh's built-in JSON decoder.
+  No custom decoder is required. Keep arrays limited to scalar values because
+  the built-in decoder does not support arrays of JSON objects.
+-->

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+storage/index.json
+logs/*.jsonl
+data/quarantine/**
+!data/quarantine/.gitkeep
+*.before-final
+reports/*.json
